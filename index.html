@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hackers Nearby</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.container{
+padding-top:120px;
+}
+
+h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+p{
+font-size:20px;
+color:#cbd5f5;
+margin-bottom:40px;
+}
+
+button{
+background:#ec3750;
+border:none;
+padding:16px 34px;
+font-size:18px;
+border-radius:10px;
+color:white;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.footer{
+position:fixed;
+bottom:20px;
+width:100%;
+font-size:14px;
+color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Hackers Nearby</h1>
+
+<p>Find Hack Club members around you</p>
+
+<a href="https://auth.hackclub.com/oauth/authorize?client_id=d8b24b29963240f7a26ef417ffc4ad4c&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth&response_type=code&scope=openid+email+name+profile+verification_status+slack_id">
+<button>Login with Hack Club</button>
+</a>
+
+</div>
+
+<div class="footer">
+Made for Hack Club
+</div>
+
+</body>
+</html>
