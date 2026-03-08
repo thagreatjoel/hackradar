@@ -1,72 +1,73 @@
-const express = require("express");
-const axios = require("axios");
-const qs = require("querystring");
-const jwt = require("jsonwebtoken");
+require("dotenv").config()
 
-const app = express();
+const express = require("express")
+const axios = require("axios")
+const qs = require("querystring")
+const path = require("path")
 
-const CLIENT_ID = "d8b24b29963240f7a26ef417ffc4ad4c";
-const CLIENT_SECRET = "61c6145bb154ba12bbac953c256ba4d690fdc9cf3a12f2136ab2766407aa14c2";
-const REDIRECT_URI = "http://localhost:3000/auth";
+const app = express()
+
+const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_SECRET = process.env.CLIENT_SECRET
+const REDIRECT_URI = process.env.REDIRECT_URI
+const PORT = process.env.PORT || 3000
+
+app.use(express.static("public"))
 
 app.get("/", (req,res)=>{
-  res.sendFile(__dirname + "/index.html");
-});
+ res.sendFile(path.join(__dirname,"public/index.html"))
+})
 
 app.get("/auth", async (req,res)=>{
 
-  const code = req.query.code;
+ const code = req.query.code
 
-  if(!code){
-    return res.send("No code received");
-  }
+ if(!code){
+  return res.send("No code received")
+ }
 
-  try{
+ try{
 
-    const tokenRes = await axios.post(
-      "https://auth.hackclub.com/oauth/token",
-      qs.stringify({
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        code: code,
-        redirect_uri: REDIRECT_URI,
-        grant_type: "authorization_code"
-      }),
-      { headers:{ "Content-Type":"application/x-www-form-urlencoded"} }
-    );
-
-    const id_token = tokenRes.data.id_token;
-
-    const user = jwt.decode(id_token);
-
-    console.log("USER:", user);
-
-    res.send(`
-      <h1>Welcome ${user.name}</h1>
-      <p>Email: ${user.email}</p>
-      <img src="${user.picture}" width="120"/>
-    `);
-
-  }catch(err){
-    console.log(err.response?.data || err.message);
-    res.send("Auth failed");
-  }
-
-});
-const access_token = tokenRes.data.access_token;
-
-const userRes = await axios.get(
-  "https://auth.hackclub.com/oauth/userinfo",
-  {
-    headers: {
-      Authorization: `Bearer ${access_token}`
+  const tokenRes = await axios.post(
+   "https://auth.hackclub.com/oauth/token",
+   qs.stringify({
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
+    code: code,
+    redirect_uri: REDIRECT_URI,
+    grant_type: "authorization_code"
+   }),
+   {
+    headers:{
+     "Content-Type":"application/x-www-form-urlencoded"
     }
-  }
-);
+   }
+  )
 
-console.log("USER:", userRes.data);
+  const access_token = tokenRes.data.access_token
 
-res.send(userRes.data);
-app.listen(3000,()=>{
-  console.log("Server running at http://localhost:3000");
-});
+  const userRes = await axios.get(
+   "https://auth.hackclub.com/oauth/userinfo",
+   {
+    headers:{
+     Authorization:`Bearer ${access_token}`
+    }
+   }
+  )
+
+  console.log("USER:", userRes.data)
+
+  res.redirect("/map.html")
+
+ }catch(err){
+
+  console.log(err.response?.data || err.message)
+  res.send("Auth failed")
+
+ }
+
+})
+
+app.listen(PORT,()=>{
+ console.log(`Server running at http://localhost:${PORT}`)
+})
