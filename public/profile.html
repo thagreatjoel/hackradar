@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Your Profile</title>
+
+<style>
+body{
+font-family:sans-serif;
+text-align:center;
+margin-top:80px;
+background:#f4f4f4;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:10px;
+width:300px;
+margin:auto;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+img{
+width:120px;
+border-radius:50%;
+margin-bottom:15px;
+}
+
+h2{
+margin:5px;
+}
+
+p{
+color:#555;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<img id="avatar">
+
+<h2 id="name"></h2>
+
+<p id="email"></p>
+
+<p id="slack"></p>
+
+</div>
+
+<script>
+
+fetch("/user")
+.then(res=>res.json())
+.then(user=>{
+
+document.getElementById("avatar").src = user.image
+document.getElementById("name").innerText = user.name
+document.getElementById("email").innerText = user.email
+document.getElementById("slack").innerText = "Slack: "+user.slack_id
+
+})
+
+</script>
+
+</body>
+
+</html>

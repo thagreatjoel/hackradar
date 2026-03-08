@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Near Me</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+margin:0;
+font-family:system-ui,Arial;
+background:linear-gradient(135deg,#6366f1,#3b82f6);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+}
+
+.container{
+text-align:center;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:50px;
+border-radius:15px;
+width:340px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1{
+margin-bottom:10px;
+font-size:32px;
+}
+
+p{
+opacity:0.9;
+margin-bottom:30px;
+}
+
+button{
+background:white;
+color:#3b82f6;
+border:none;
+padding:14px 28px;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 6px 20px rgba(0,0,0,0.2);
+}
+
+.footer{
+margin-top:25px;
+font-size:13px;
+opacity:0.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Near Me</h1>
+
+<p>Discover Hack Club members near you</p>
+
+<a href="https://auth.hackclub.com/oauth/authorize?client_id=d8b24b29963240f7a26ef417ffc4ad4c&redirect_uri=http://localhost:3000/auth&response_type=code&scope=openid email name profile verification_status slack_id">
+
+<button>Login with Hack Club</button>
+
+</a>
+
+<div class="footer">
+Built for Hack Club
+</div>
+
+</div>
+
+</body>
+</html>

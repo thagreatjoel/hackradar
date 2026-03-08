@@ -12,12 +12,16 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI
 const PORT = process.env.PORT || 3000
 
+let userData = null
+
+// serve public folder
 app.use(express.static("public"))
 
 app.get("/", (req,res)=>{
  res.sendFile(path.join(__dirname,"public/index.html"))
 })
 
+// OAuth callback
 app.get("/auth", async (req,res)=>{
 
  const code = req.query.code
@@ -55,19 +59,32 @@ app.get("/auth", async (req,res)=>{
    }
   )
 
-  console.log("USER:", userRes.data)
+  userData = userRes.data
 
-  res.redirect("/map.html")
+  console.log("USER:", userData)
+
+  res.redirect("/profile.html")
 
  }catch(err){
 
-  console.log(err.response?.data || err.message)
+  console.log("ERROR:", err.response?.data || err.message)
   res.send("Auth failed")
 
  }
 
 })
 
+// API to return logged user data
+app.get("/user",(req,res)=>{
+
+ if(!userData){
+  return res.json({error:"not logged in"})
+ }
+
+ res.json(userData)
+
+})
+
 app.listen(PORT,()=>{
- console.log(`Server running at http://localhost:${PORT}`)
+ console.log("Server running at http://localhost:"+PORT)
 })
