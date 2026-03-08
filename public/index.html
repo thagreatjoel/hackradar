@@ -3,64 +3,102 @@
 
 <head>
 
-<title>Near Me</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>HackRadar</title>
 
 <style>
 
 body{
 margin:0;
-font-family:system-ui,Arial;
-background:linear-gradient(135deg,#6366f1,#3b82f6);
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
+font-family:system-ui;
+background:#0f3a5a;
 color:white;
-}
-
-.container{
 text-align:center;
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
-padding:50px;
-border-radius:15px;
-width:340px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-h1{
-margin-bottom:10px;
-font-size:32px;
+/* HERO */
+
+.hero{
+height:520px;
+background:url("/map.png") center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 }
 
-p{
+.hero h1{
+font-size:64px;
+margin:0;
+letter-spacing:2px;
+}
+
+.hero p{
+font-size:18px;
 opacity:0.9;
-margin-bottom:30px;
+margin-top:10px;
 }
 
-button{
-background:white;
-color:#3b82f6;
+/* LOGIN BUTTON */
+
+.login-btn{
+margin-top:30px;
+padding:14px 36px;
+font-size:18px;
 border:none;
-padding:14px 28px;
-font-size:16px;
 border-radius:8px;
+background:#ec3750;
+color:white;
 cursor:pointer;
 font-weight:600;
-transition:0.2s;
 }
 
-button:hover{
+.login-btn:hover{
 transform:scale(1.05);
-box-shadow:0 6px 20px rgba(0,0,0,0.2);
 }
+
+/* INFO SECTION */
+
+.section{
+padding:60px 20px;
+max-width:900px;
+margin:auto;
+}
+
+.section h2{
+font-size:32px;
+margin-bottom:20px;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+}
+
+.card{
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:10px;
+max-width:250px;
+}
+
+.card h3{
+margin-top:0;
+}
+
+.card p{
+opacity:0.8;
+}
+
+/* FOOTER */
 
 .footer{
-margin-top:25px;
-font-size:13px;
-opacity:0.8;
+padding:30px;
+opacity:0.6;
+font-size:14px;
 }
 
 </style>
@@ -69,22 +107,41 @@ opacity:0.8;
 
 <body>
 
-<div class="container">
+<!-- HERO -->
 
-<h1>Near Me</h1>
+<div class="hero">
 
-<p>Discover Hack Club members near you</p>
+<h1>HACKRADAR</h1>
+
+<p>Discover Hack Club hackers around the world</p>
 
 <a href="https://auth.hackclub.com/oauth/authorize?client_id=d8b24b29963240f7a26ef417ffc4ad4c&redirect_uri=http://localhost:3000/auth&response_type=code&scope=openid email name profile verification_status slack_id">
 
-<button>Login with Hack Club</button>
+<button class="login-btn">
+Login with Hack Club
+</button>
 
 </a>
 
-<div class="footer">
-Built for Hack Club
 </div>
 
+<!-- ABOUT -->
+
+<div class="section">
+
+<h2>What is HackRadar?</h2>
+
+<p>
+HackRadar helps you discover Hack Club members around the world.  
+Connect with hackers, collaborate on projects, and find people near you.
+</p>
+
+</div>
+
+
+
+<div class="footer">
+Built for Hack Club
 </div>
 
 </body>
